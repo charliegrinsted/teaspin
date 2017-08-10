@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 import { Navigation } from 'react-native-navigation';
-import styles from './App/Styles/Main.js';
+import styles from './App/Styles/Main';
 var RNFS = require( 'react-native-fs' );
 
 class HomeScreen extends Component {
