@@ -8,6 +8,7 @@ Person.schema = {
 		id: 'int',
 		name: 'string',
 		photo: 'string',
+		teaPreference: 'string',
 		completedSpins: {
 			type: 'linkingObjects',
 			objectType: 'Spin',
