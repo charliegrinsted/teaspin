@@ -1344,7 +1344,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = TeaSpin;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1371,7 +1371,7 @@
 					"-lc++",
 				);
 				PRODUCT_NAME = TeaSpin;
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

@@ -36,7 +36,6 @@ const RealmHelper = {
 		} );
 		return randomisedPresentationId;
 	},
-
 	deletePresentation: ( realm, id ) => {
 		let presentation = realm.objectForPrimaryKey( 'Presentation', id );
 		realm.write(() => {

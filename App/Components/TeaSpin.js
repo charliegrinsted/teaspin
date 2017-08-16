@@ -8,8 +8,11 @@ import {
 	TouchableHighlight,
 } from 'react-native';
 
+import RealmHelper from '../Helpers/RealmHelper';
+import NavigationHelper from '../Helpers/NavigationHelper';
+
 import styles from '../Styles/Main';
-import Realm from '../Models/Realms';
+import Realm from '../Models/Realm';
 
 var RNFS = require( 'react-native-fs' );
 
@@ -39,38 +42,18 @@ class SpinCandidate extends React.PureComponent {
 }
 
 
-class ListProjects extends Component {
+class TeaSpin extends Component {
 
 	constructor( props ) {
 		super(props);
-		this.props.navigator.setOnNavigatorEvent( NavigationHelper.NavigationHelper.onNavigatorEvent.bind( this ) );
-		var thisSection = Realm.objectForPrimaryKey( 'Section', this.props.id );
+		var people = RealmHelper.getMultipleObjectsAsArray( Realm, 'Person' );
 		this.state = {
-			hasData: thisSection.projects.length,
-			data: thisSection.projects,
+			hasData: people.length,
+			data: people,
 		};
 	}
 
 	_keyExtractor = ( item, index ) => item.id;
-
-	_goToSlides = ( id, title ) => {
-		this.props.navigator.push({
-			screen: 'oneWorks.ViewProjectSlides',
-			title: title,
-			animationType: 'slide',
-			backButtonHidden: false,
-			passProps: {
-				id,
-			},
-			navigatorStyle: {
-				navBarTextFontFamily: 'OpenSans',
-				navBarBackgroundColor: colours.white,
-				navBarTextColor: colours.black,
-				navBarButtonColor: colours.brandBlue,
-			},
-			navigatorButtons: NavigationHelper.mainNavigation,
-		});
-	}
 
 	_renderFooter = () => {
 		return (
@@ -83,7 +66,6 @@ class ListProjects extends Component {
 		return (
 			<ProjectListingItem
 				id={item.id}
-				onPressItem={this._goToSlides}
 				title={item.title}
 				image={item.image} />
 		)
@@ -94,7 +76,7 @@ class ListProjects extends Component {
 			return (
 				<View style={styles.container}>
 					<Text style={styles.instructions}>
-						There are no projects, go to update
+						There are no people
 					</Text>
 				</View>
 			);
@@ -113,4 +95,4 @@ class ListProjects extends Component {
 	}
 }
 
-module.exports = ListProjects;
+module.exports = TeaSpin;

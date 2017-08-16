@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		flexDirection: 'row',
 		backgroundColor: '#000000',
 	},
 	mainLogo: {
@@ -10,9 +11,8 @@ const styles = StyleSheet.create({
 		height: 174,
 	},
 	homeMenuButton: {
+		flex: 1,
 		backgroundColor: '#FFFFFF',
-		height: 200,
-		width: 400,
 		marginBottom: 20,
 		borderRadius: 5,
 	},
