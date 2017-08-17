@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import {
+	AlertIOS,
+	KeyboardAvoidingView,
 	AppRegistry,
 	Text,
 	FlatList,
 	Image,
 	View,
+	TextInput,
 	TouchableHighlight,
 } from 'react-native';
 
@@ -15,10 +18,7 @@ var RNFS = require( 'react-native-fs' );
 var ImagePicker = require('react-native-image-picker');
 
 var options = {
-	title: 'Select Avatar',
-	customButtons: [
-		{name: 'fb', title: 'Choose Photo from Facebook'},
-	],
+	title: 'Add a photo',
 	storageOptions: {
 	skipBackup: true,
 	path: 'images'
@@ -56,11 +56,26 @@ class AddPerson extends Component {
 
 	render(){
 		return (
-			<View style={styles.container}>
-				<Text style={styles.instructions}>
-					There are no people
-				</Text>
-			</View>
+			<KeyboardAvoidingView style={styles.container} behavior='padding'>
+				<View style={styles.form__row}>
+					<TouchableHighlight style={styles.presentation__nameSubmitOuter} onPress={this._addAPhoto}>
+						<Text style={styles.presentation__nameSubmitInner}>Add a photo</Text>
+					</TouchableHighlight>
+					<TextInput
+						style={styles.presentation__nameInput}
+						autoFocus={true}
+					    onChangeText={( presentationName ) => this.setState( {
+							currentName: presentationName,
+							buttonStyle: styles.presentation__nameSubmitOuterEnabled,
+						})}
+						value={this.state.currentName}
+						placeholder={'Person Name'}
+						maxLength={40} />
+					<TouchableHighlight style={styles.presentation__nameSubmitOuter} onPress={this._addAPhoto}>
+						<Text style={styles.presentation__nameSubmitInner}>Submit</Text>
+					</TouchableHighlight>
+				</View>
+			</KeyboardAvoidingView>
 		);
 	}
 }
