@@ -20,8 +20,8 @@ var ImagePicker = require('react-native-image-picker');
 var options = {
 	title: 'Add a photo',
 	storageOptions: {
-	skipBackup: true,
-	path: 'images'
+		skipBackup: true,
+		path: 'images'
 	}
 };
 

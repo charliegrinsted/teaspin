@@ -1343,7 +1343,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "-";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ten4design.TeaSpin;
 				PRODUCT_NAME = TeaSpin;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1371,7 +1371,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "-";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ten4design.TeaSpin;
 				PRODUCT_NAME = TeaSpin;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
