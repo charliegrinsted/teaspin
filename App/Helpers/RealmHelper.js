@@ -13,14 +13,14 @@ const RealmHelper = {
 			realm.deleteAll();
 		} );
 	},
-	addPerson: ( realm, name ) => {
-		var randomisedPresentationId = Math.random().toString( 36 ).substr( 2, 9 );
-		var dateInitiated = Date.now();
+	addPerson: ( realm, name, photo, teaPreference ) => {
+		var randomisedPersonId = Math.random().toString( 36 ).substr( 2, 9 );
 		realm.write(() => {
-			realm.create( 'Presentation', {
-				id: randomisedPresentationId,
+			realm.create( 'Person', {
+				id: randomisedPersonId,
 				name: name,
-				dateCreated: Date.now()
+				photo: photo,
+				teaPreference: teaPreference,
 			}, true );
 		} );
 	},

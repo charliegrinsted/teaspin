@@ -5,7 +5,7 @@ Person.schema = {
 	name: 'Person',
 	primaryKey: 'id',
 	properties: {
-		id: 'int',
+		id: 'string',
 		name: 'string',
 		photo: 'string',
 		teaPreference: 'string',
@@ -22,7 +22,7 @@ Spin.schema = {
 	name: 'Spin',
 	primaryKey: 'id',
 	properties: {
-		id: 'int',
+		id: 'string',
 		type: 'string',
 		dateInitiated: 'date',
 		loser: {

@@ -12,6 +12,7 @@ import RealmHelper from '../Helpers/RealmHelper';
 import NavigationHelper from '../Helpers/NavigationHelper';
 
 import styles from '../Styles/Main';
+import colours from '../Styles/Colours';
 import Realm from '../Models/Realm';
 
 var RNFS = require( 'react-native-fs' );
@@ -19,7 +20,7 @@ var RNFS = require( 'react-native-fs' );
 class SpinCandidate extends React.PureComponent {
 
 	_onPress = () => {
-		this.props.onPressItem( this.props.id, this.props.title );
+		this.props.onPressItem( this.props.id, this.props.name );
 	};
 
 	render() {
@@ -28,11 +29,11 @@ class SpinCandidate extends React.PureComponent {
 				<View style={styles.projectBlock}>
 					<Image
 						style={ styles.projectBlock__image }
-						source={{ uri: 'file://' + RNFS.DocumentDirectoryPath + '/' + this.props.image }}
-					/>
+						source={{ uri: this.props.image }} />
+					{this.props.selected ? <View style={styles.presentationBlock__overlay}></View> : null}
 					<View style={styles.projectBlock__title}>
 						<Text style={styles.projectBlock__titleText}>
-							{this.props.title}
+							{this.props.name}
 						</Text>
 					</View>
 				</View>
@@ -41,6 +42,7 @@ class SpinCandidate extends React.PureComponent {
 	}
 }
 
+var selectedPeople = [];
 
 class TeaSpin extends Component {
 
@@ -48,9 +50,13 @@ class TeaSpin extends Component {
 		super(props);
 		var people = RealmHelper.getMultipleObjectsAsArray( Realm, 'Person' );
 		this.state = {
-			hasData: people.length,
 			data: people,
+			selected: ( new Map(): Map<string, boolean> ),
 		};
+	}
+
+	componentWillMount() {
+		var alreadySelected = new Map( this.state.selected );
 	}
 
 	_keyExtractor = ( item, index ) => item.id;
@@ -64,11 +70,33 @@ class TeaSpin extends Component {
 
 	_renderItem = ({item}) => {
 		return (
-			<ProjectListingItem
+			<SpinCandidate
+				onPressItem={this._toggleSelected}
 				id={item.id}
-				title={item.title}
-				image={item.image} />
+				name={item.name}
+				preference={item.teaPreference}
+				selected={!!this.state.selected.get( item.id )}
+				image={item.photo} />
 		)
+	}
+
+	_toggleSelected = ( id ) => {
+		console.log( this.state.selectedPeople );
+		console.log( id );
+		var indexOfSelectedItem = selectedPeople.indexOf( id );
+		if ( indexOfSelectedItem == -1 ) {
+			selectedPeople.push( id );
+		} else {
+			selectedPeople.splice( indexOfSelectedItem, 1 );
+		}
+		this.setState( {
+			selectedPeople: selectedPeople,
+		} );
+		this.setState( ( state ) => {
+			const selected = new Map(state.selected);
+			selected.set(id, !selected.get(id));
+			return {selected};
+		} );
 	}
 
 	render(){
@@ -85,7 +113,8 @@ class TeaSpin extends Component {
 			<View style={styles.containerFlush}>
 				<FlatList
 					data={this.state.data}
-					numColumns={4}
+					numColumns={1}
+					removeClippedSubviews={false}
 					ListFooterComponent={this._renderFooter}
 					keyExtractor={this._keyExtractor}
 					renderItem={this._renderItem}
